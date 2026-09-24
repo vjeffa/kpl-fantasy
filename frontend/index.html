@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+   <!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -1444,8 +1444,39 @@ a:hover{color:var(--kpl-maroon-dark)}
 .kpl-fdr-1{background:#dff5df;color:#18753b}.kpl-fdr-2{background:#eaf5d4;color:#53751b}.kpl-fdr-3{background:#fff1cc;color:#8a6400}.kpl-fdr-4{background:#ffe0d9;color:#a23d2b}.kpl-fdr-5{background:#f4c7c7;color:#8a1e1e}
 .kpl-insight-row{display:grid;grid-template-columns:1.5fr .65fr .65fr .7fr .7fr .75fr;gap:10px;align-items:center}
 .kpl-player-stat{font-size:12px;color:#666}.kpl-player-stat b{color:#222}
-.kpl-chip-panel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
-.kpl-chip{padding:14px;border:1px solid #ddd;border-radius:12px;background:#fff}.kpl-chip strong{display:block;margin-bottom:4px}.kpl-chip small{color:#777}.kpl-chip button{margin-top:9px}
+.kpl-chip-panel{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  width:100%;
+  margin:18px 0;
+}
+
+.kpl-chip{
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  background:#fff;
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.kpl-chip strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.kpl-chip small{
+  color:#777;
+}
+
+.kpl-chip button{
+  margin-top:9px;
+  width:max-content;
+  padding:6px 12px;
+}
 .kpl-live-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#fff;background:#a33332;border-radius:999px;padding:5px 9px}
 .kpl-live-pill:before{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
 .kpl-deadline{font-weight:800;color:#f2c2c2}
@@ -2024,415 +2055,161 @@ html.kpl-auth-gated-html, body.kpl-auth-gated{background:#07120f!important;overf
 @media(max-width:760px){.kpl-auth-overlay{padding:12px!important;overflow:auto}.kpl-auth-box{grid-template-columns:1fr;max-width:520px;min-height:0;max-height:calc(100vh - 24px);overflow:auto}.kpl-auth-head{min-height:0;padding:30px 26px!important}.kpl-auth-head h2{font-size:31px!important}.kpl-auth-brand{margin-bottom:22px}.kpl-auth-league-logo{width:66px;height:66px}.kpl-auth-brand-copy span{font-size:20px}.kpl-auth-body{padding:28px 24px!important}.kpl-auth-feature-row{margin-top:20px}.kpl-auth-close{display:none!important}}
 </style>
 
-<style id="kpl-fantasy-premium-visual-layer">
-/* =========================================================
-   KPL FANTASY — PREMIUM VISUAL LAYER
-   Visual-only enhancement: existing HTML, JS, auth, API,
-   squad persistence and backend integration are preserved.
-   ========================================================= */
-
+<style id="kpl-exact-reference-visual">
+/* KPL Fantasy — exact reference visual treatment. Existing application markup, auth, API and data remain intact. */
 :root{
-  --kpl-green:#0b7a45;
-  --kpl-green-2:#10a85d;
-  --kpl-deep:#063b25;
-  --kpl-lime:#b9f36a;
-  --kpl-gold:#f7c948;
-  --kpl-ink:#111827;
-  --kpl-muted:#667085;
-  --kpl-bg:#f4f7f5;
-  --kpl-card:rgba(255,255,255,.94);
-  --kpl-line:rgba(17,24,39,.08);
-  --kpl-shadow:0 18px 50px rgba(8,44,28,.10);
-  --kpl-shadow-sm:0 8px 24px rgba(8,44,28,.08);
+  --ref-blue:#16d8dc;
+  --ref-blue2:#2587ef;
+  --ref-purple:#6848ef;
+  --ref-ink:#24105e;
+  --ref-bg:#f5f8fc;
+  --ref-green:#09a957;
 }
-
-html{scroll-behavior:smooth}
-body{
-  background:
-    radial-gradient(circle at 10% 0%,rgba(16,168,93,.10),transparent 30%),
-    radial-gradient(circle at 95% 8%,rgba(247,201,72,.10),transparent 24%),
-    linear-gradient(180deg,#f7faf8 0%,#eef4f0 100%) !important;
-  color:var(--kpl-ink);
+html,body{background:var(--ref-bg)!important;color:var(--ref-ink)!important}
+body{overflow-x:hidden!important}
+/* Desktop FPL-style shell */
+.sidebar{display:none!important}
+.main{margin-left:0!important;width:100%!important;max-width:none!important}
+.kpl-site-shell{position:relative!important;top:auto!important;background:transparent!important;box-shadow:none!important;z-index:20!important}
+.kpl-mode-tabs{display:none!important}
+.kpl-utility-bar{display:none!important}
+.kpl-main-nav{
+  height:74px!important;
+  min-height:74px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+  padding:0 28px 0 30px!important;
+  overflow-x:auto!important;
+  background:linear-gradient(100deg,var(--ref-blue) 0%,#2188ed 48%,var(--ref-purple) 100%)!important;
+  border:0!important;
+  box-shadow:0 5px 20px rgba(47,64,140,.18)!important;
+  scrollbar-width:none!important;
 }
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  opacity:.28;
-  background-image:
-    linear-gradient(rgba(11,122,69,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(11,122,69,.035) 1px,transparent 1px);
-  background-size:32px 32px;
+.kpl-main-nav::-webkit-scrollbar{display:none!important}
+.kpl-main-nav .nav-btn,.kpl-signout{
+  height:52px!important;
+  padding:0 13px!important;
+  margin:0!important;
+  flex:0 0 auto!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#fff!important;
+  font-size:13px!important;
+  font-weight:800!important;
+  letter-spacing:.1px!important;
+  box-shadow:none!important;
+  white-space:nowrap!important;
+  position:relative!important;
 }
-
-.sidebar{
-  background:
-    radial-gradient(circle at 50% 0%,rgba(38,205,119,.20),transparent 34%),
-    linear-gradient(180deg,#052d1d 0%,#063b25 48%,#04291b 100%) !important;
-  border-right:1px solid rgba(255,255,255,.08) !important;
-  box-shadow:12px 0 45px rgba(0,0,0,.12);
-}
-
-.sidebar .logo{
-  position:relative;
-  padding-top:24px !important;
-  padding-bottom:24px !important;
-}
-
-.sidebar .logo::after{
-  content:"";
-  position:absolute;
-  left:20%;
-  right:20%;
-  bottom:0;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(185,243,106,.5),transparent);
-}
-
-.sidebar .logo h1{
-  letter-spacing:.10em !important;
-  text-shadow:0 3px 18px rgba(0,0,0,.25);
-}
-
-.sidebar .logo p{
-  color:#b9f36a !important;
-  font-weight:800 !important;
-  letter-spacing:.14em !important;
-}
-
-.sidebar .nav-btn{
-  border:1px solid transparent !important;
-  border-radius:12px !important;
-  margin:3px 10px !important;
-  width:calc(100% - 20px) !important;
-  transition:transform .2s ease,background .2s ease,box-shadow .2s ease !important;
-}
-
-.sidebar .nav-btn:hover{
-  transform:translateX(4px);
-  background:rgba(255,255,255,.08) !important;
-}
-
-.sidebar .nav-btn.active{
-  background:linear-gradient(135deg,rgba(16,168,93,.95),rgba(8,111,62,.95)) !important;
-  box-shadow:0 8px 24px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.16);
-  border-color:rgba(185,243,106,.18) !important;
-}
-
-.main{
-  background:transparent !important;
-}
-
-.topbar{
-  position:sticky !important;
-  top:0;
-  z-index:50;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  background:rgba(255,255,255,.86) !important;
-  border-bottom:1px solid rgba(17,24,39,.07) !important;
-  box-shadow:0 8px 28px rgba(8,44,28,.05);
-}
-
-.kpl-utility-sub{color:var(--kpl-muted) !important}
-.kpl-deadline-pill{
-  background:linear-gradient(135deg,#fff9df,#fff) !important;
-  border:1px solid rgba(247,201,72,.45) !important;
-  box-shadow:0 6px 18px rgba(247,201,72,.12);
-}
-.kpl-deadline-pill i{
-  box-shadow:0 0 0 5px rgba(16,168,93,.10);
-  animation:kplPulse 1.8s infinite;
-}
-
-.kpl-site-shell{max-width:1440px !important}
-
-.kpl-hero,
-.hero{
-  position:relative;
-  overflow:hidden;
-  border-radius:24px !important;
-  box-shadow:var(--kpl-shadow) !important;
-}
-
+.kpl-main-nav .nav-btn span,.kpl-signout span{color:#fff!important;margin-right:5px!important}
+.kpl-main-nav .nav-btn:hover{background:rgba(255,255,255,.10)!important;transform:none!important}
+.kpl-main-nav .nav-btn.active{background:rgba(255,255,255,.16)!important;color:#fff!important;border-radius:10px!important}
+.kpl-main-nav .nav-btn.active:after{display:none!important}
+.kpl-signout{display:none!important}
+/* compact brand block added visually inside nav using the first Home item */
+.kpl-home-nav{margin-left:0!important}
+/* Hero: light, short, with four large unobstructed photos on the right */
 .kpl-hero{
-  background:
-    radial-gradient(circle at 80% 15%,rgba(185,243,106,.22),transparent 24%),
-    radial-gradient(circle at 20% 100%,rgba(16,168,93,.30),transparent 30%),
-    linear-gradient(135deg,#063b25 0%,#075d36 48%,#092f20 100%) !important;
-  border:1px solid rgba(185,243,106,.14);
+  height:236px!important;
+  border-radius:0!important;
+  background:linear-gradient(110deg,#f6f9fd 0%,#f3f7fb 54%,#ffffff 100%)!important;
+  color:var(--ref-ink)!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
 }
-
-.kpl-hero::after{
-  content:"";
-  position:absolute;
-  width:420px;
-  height:420px;
-  right:-170px;
-  bottom:-240px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:50%;
-  box-shadow:0 0 0 55px rgba(255,255,255,.025),0 0 0 110px rgba(255,255,255,.018);
+.kpl-hero:before{
+  background:linear-gradient(128deg,transparent 38%,rgba(20,215,220,.08) 39%,transparent 52%),linear-gradient(156deg,transparent 45%,rgba(102,72,239,.08) 46%,transparent 62%)!important;
 }
-
-.hero{
-  background:
-    radial-gradient(circle at 90% 10%,rgba(185,243,106,.24),transparent 25%),
-    linear-gradient(135deg,#073b26,#0a7141) !important;
-  color:#fff !important;
+.kpl-hero-copy{left:58px!important;top:50px!important;max-width:500px!important;z-index:6!important}
+.kpl-brand-row{gap:12px!important;align-items:center!important}
+.kpl-league-logo{width:54px!important;height:54px!important;flex-basis:54px!important;border-radius:10px!important;padding:3px!important;background:#fff!important;box-shadow:0 5px 14px rgba(31,43,79,.14)!important}
+.kpl-brand{font-size:37px!important;line-height:.92!important;letter-spacing:-1.7px!important;color:#211064!important}
+.kpl-brand span{color:#211064!important}
+.kpl-season{margin-top:5px!important;font-size:10px!important;letter-spacing:1.7px!important;color:#756e8f!important}
+.kpl-hero-tagline{margin:13px 0 0 66px!important;font-size:13px!important;color:#5e5b78!important;font-style:normal!important}
+.kpl-hero-glow{display:none!important}
+.kpl-hero-source-note{display:none!important}
+.kpl-hero-account{right:24px!important;top:17px!important;z-index:9!important}
+.kpl-account-btn{background:#fff!important;color:#27105f!important;border:1px solid #e3e4ec!important;box-shadow:0 7px 20px rgba(45,45,80,.10)!important;padding:7px 11px!important}
+.kpl-account-btn small{color:#776f88!important}
+.kpl-account-avatar{width:34px!important;height:34px!important;background:#24105e!important;color:#fff!important}
+.kpl-chevron{color:#24105e!important}
+.kpl-hero-players{
+  right:26px!important;
+  bottom:0!important;
+  width:58%!important;
+  max-width:1080px!important;
+  height:196px!important;
+  display:flex!important;
+  gap:10px!important;
+  justify-content:flex-end!important;
+  align-items:stretch!important;
+  opacity:1!important;
+  z-index:4!important;
 }
-
-.hero h2,.hero p{color:#fff !important}
-.hero p{opacity:.84}
-
-.countdown{
-  background:rgba(255,255,255,.10) !important;
-  border:1px solid rgba(255,255,255,.15) !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
-  backdrop-filter:blur(12px);
+.kpl-hero-player,
+.kpl-hero-player:nth-child(2),
+.kpl-hero-player:nth-child(3),
+.kpl-hero-player:nth-child(4),
+.kpl-hero-player:nth-child(5),
+.kpl-hero-player:nth-child(6){
+  height:196px!important;
+  width:calc((100% - 30px)/4)!important;
+  flex:1 1 0!important;
+  max-width:205px!important;
+  min-width:120px!important;
+  border-radius:12px 12px 0 0!important;
+  background:#e7edf5!important;
+  filter:none!important;
+  box-shadow:0 5px 16px rgba(24,39,75,.10)!important;
 }
-
-.time-box{
-  background:rgba(255,255,255,.10) !important;
-  border:1px solid rgba(255,255,255,.13) !important;
-  transition:transform .2s ease,background .2s ease;
+.kpl-hero-player img{
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;
+  object-position:center 18%!important;
+  mask-image:none!important;-webkit-mask-image:none!important;
 }
-.time-box:hover{
-  transform:translateY(-3px);
-  background:rgba(255,255,255,.16) !important;
+.kpl-hero-player:after{display:none!important}
+.kpl-hero-player .hero-name,.kpl-hero-player .hero-club{display:none!important}
+/* Show four photos, not six, for the clean reference composition */
+.kpl-hero-player:nth-child(n+5){display:none!important}
+/* Main content */
+.content{padding:28px 58px 50px!important;max-width:1500px!important;margin:0 auto!important;background:transparent!important}
+.page-header{margin-bottom:20px!important}
+.page-header h2{color:#211064!important;font-size:36px!important;font-weight:900!important}
+.page-header p{color:#686580!important}
+.cards{gap:18px!important;margin-bottom:22px!important}
+.card{border:1px solid #e2e6ef!important;border-radius:12px!important;box-shadow:0 5px 18px rgba(45,58,90,.06)!important;background:#fff!important}
+.card-title{color:#77718d!important}
+.card-value{color:#211064!important}
+/* Team/pitch workspace */
+.section-card{border:1px solid #e2e6ef!important;border-radius:12px!important;box-shadow:0 5px 18px rgba(45,58,90,.05)!important;background:#fff!important}
+.pitch{border-radius:16px!important;min-height:620px!important;background:linear-gradient(180deg,#08a957,#079b51)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.10)!important}
+/* Responsive: keep photos readable rather than crushing them */
+@media(max-width:1100px){
+  .kpl-main-nav{padding-left:12px!important;padding-right:12px!important}
+  .kpl-main-nav .nav-btn{padding:0 9px!important;font-size:12px!important}
+  .kpl-hero-copy{left:28px!important;top:42px!important}
+  .kpl-hero-players{width:57%!important;right:14px!important;gap:6px!important}
+  .content{padding-left:28px!important;padding-right:28px!important}
 }
-
-.cards{
-  gap:16px !important;
+@media(max-width:750px){
+  .kpl-main-nav{height:62px!important;min-height:62px!important}
+  .kpl-main-nav .nav-btn{height:46px!important;font-size:11px!important;padding:0 8px!important}
+  .kpl-hero{height:190px!important}
+  .kpl-hero-copy{left:18px!important;top:32px!important}
+  .kpl-league-logo{width:42px!important;height:42px!important;flex-basis:42px!important}
+  .kpl-brand{font-size:28px!important}
+  .kpl-season{font-size:7px!important;letter-spacing:1px!important}
+  .kpl-hero-tagline{margin-left:54px!important;font-size:10px!important}
+  .kpl-hero-players{height:150px!important;width:56%!important;right:8px!important;gap:4px!important}
+  .kpl-hero-player,.kpl-hero-player:nth-child(2),.kpl-hero-player:nth-child(3),.kpl-hero-player:nth-child(4){height:150px!important;min-width:55px!important}
+  .kpl-hero-account{right:8px!important;top:8px!important}.kpl-account-btn{padding:5px 8px!important}
+  .content{padding:20px 14px 35px!important}
 }
-
-.cards > *,.section-card,.card,.panel,.stat-card,.fixture-card{
-  border:1px solid var(--kpl-line) !important;
-  box-shadow:var(--kpl-shadow-sm) !important;
-  background:var(--kpl-card) !important;
-  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease !important;
-}
-
-.cards > *:hover,.section-card:hover,.card:hover,.panel:hover,.stat-card:hover,.fixture-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 18px 42px rgba(8,44,28,.12) !important;
-  border-color:rgba(16,168,93,.18) !important;
-}
-
-button,.btn{
-  border-radius:11px !important;
-  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease !important;
-}
-button:hover,.btn:hover{
-  transform:translateY(-2px);
-  filter:saturate(1.08);
-}
-button:active,.btn:active{transform:translateY(0)}
-
-.btn{
-  box-shadow:0 8px 18px rgba(8,44,28,.10);
-}
-
-input,select,textarea{
-  border-radius:11px !important;
-  border:1px solid rgba(17,24,39,.12) !important;
-  background:#fff !important;
-  transition:border-color .18s ease,box-shadow .18s ease !important;
-}
-input:focus,select:focus,textarea:focus{
-  border-color:rgba(16,168,93,.65) !important;
-  box-shadow:0 0 0 4px rgba(16,168,93,.10) !important;
-  outline:none !important;
-}
-
-.kpl-gwbar{
-  background:
-    radial-gradient(circle at 90% 20%,rgba(185,243,106,.15),transparent 25%),
-    linear-gradient(135deg,#063b25,#09251a) !important;
-  border:1px solid rgba(185,243,106,.12);
-  box-shadow:var(--kpl-shadow);
-}
-
-.fpl-points-head h2{
-  color:#073b26 !important;
-}
-
-.fpl-eyebrow{
-  color:var(--kpl-green) !important;
-}
-
-.challenge-hero{
-  background:
-    radial-gradient(circle at 85% 15%,rgba(185,243,106,.18),transparent 25%),
-    linear-gradient(135deg,#073b26,#0a7141) !important;
-  border-radius:22px !important;
-  box-shadow:var(--kpl-shadow) !important;
-}
-
-.challenge-pitch{
-  border-radius:18px !important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 18px 40px rgba(8,44,28,.12);
-}
-
-.kpl-star-grid,.kpl-insight-row{
-  gap:14px !important;
-}
-
-.kpl-star-card,.kpl-star-feature,.kpl-insight-card{
-  border-radius:18px !important;
-  box-shadow:var(--kpl-shadow-sm) !important;
-  border:1px solid var(--kpl-line) !important;
-  transition:transform .22s ease,box-shadow .22s ease !important;
-}
-
-.kpl-star-card:hover,.kpl-star-feature:hover,.kpl-insight-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 20px 44px rgba(8,44,28,.13) !important;
-}
-
-.kpl-auth-modal,.modal{
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-}
-
-.kpl-auth-modal .modal-content,
-.kpl-auth-modal .auth-modal,
-.modal-content{
-  border-radius:22px !important;
-  border:1px solid rgba(16,168,93,.12) !important;
-  box-shadow:0 30px 90px rgba(0,0,0,.22) !important;
-}
-
-.kpl-auth-tabs button{
-  border-radius:10px !important;
-}
-
-.kpl-auth-tabs button.active{
-  background:linear-gradient(135deg,var(--kpl-green),var(--kpl-green-2)) !important;
-  color:#fff !important;
-  box-shadow:0 8px 20px rgba(16,168,93,.22);
-}
-
-.kpl-auth-message.success{
-  color:#087443 !important;
-  background:rgba(16,168,93,.08);
-  border-radius:10px;
-  padding:9px 11px;
-}
-
-.kpl-auth-message.error{
-  background:rgba(220,38,38,.07);
-  border-radius:10px;
-  padding:9px 11px;
-}
-
-table{
-  border-collapse:separate !important;
-  border-spacing:0 !important;
-  overflow:hidden;
-  border-radius:14px;
-}
-thead th{
-  background:#edf7f1 !important;
-  color:#155c3a !important;
-}
-tbody tr{
-  transition:background .18s ease;
-}
-tbody tr:hover{
-  background:rgba(16,168,93,.045) !important;
-}
-
-.badge,.pill,.tag{
-  border-radius:999px !important;
-  font-weight:800 !important;
-}
-
-a{
-  transition:color .18s ease,opacity .18s ease;
-}
-a:hover{opacity:.86}
-
-@keyframes kplPulse{
-  0%,100%{transform:scale(1);opacity:1}
-  50%{transform:scale(.82);opacity:.55}
-}
-
-@keyframes kplFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-}
-
-@keyframes kplShimmer{
-  0%{background-position:-500px 0}
-  100%{background-position:500px 0}
-}
-
-.kpl-hero-glow{animation:kplFloat 7s ease-in-out infinite}
-.kpl-glow-two{animation-delay:-3s}
-
-.kpl-brand-row img,
-.kpl-league-logo{
-  filter:drop-shadow(0 8px 20px rgba(0,0,0,.18));
-}
-
-.kpl-star-feature-jersey{
-  animation:kplFloat 5s ease-in-out infinite;
-}
-
-@media(max-width:1000px){
-  .sidebar{
-    box-shadow:8px 0 32px rgba(0,0,0,.16);
-  }
-  .kpl-hero,.hero{border-radius:18px !important}
-}
-
-@media(max-width:700px){
-  body{background:#f4f7f5 !important}
-  .topbar{
-    position:sticky !important;
-  }
-  .kpl-hero,.hero{
-    border-radius:16px !important;
-    box-shadow:0 12px 30px rgba(8,44,28,.10) !important;
-  }
-  .kpl-utility-right{
-    gap:7px !important;
-  }
-  .kpl-deadline-pill{
-    font-size:10px !important;
-  }
-  .cards{
-    gap:11px !important;
-  }
-  .cards > *,.section-card,.card,.panel,.stat-card,.fixture-card{
-    box-shadow:0 8px 22px rgba(8,44,28,.07) !important;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
-    transition-duration:.01ms !important;
-  }
-}
-</style>
-
-
-<style id="kpl-forgot-password-style">
-.kpl-forgot-link{display:block;width:100%;margin:10px 0 2px;text-align:right;border:0;background:none;color:#0b7a45;font-size:12px;font-weight:800;cursor:pointer;padding:0}
-.kpl-forgot-link:hover{text-decoration:underline;color:#063b25}
-.kpl-reset-panel{display:none}
-.kpl-reset-panel.show{display:block}
-.kpl-reset-copy{font-size:12px;line-height:1.55;color:#667085;margin:0 0 16px}
-.kpl-reset-back{display:block;width:100%;margin-top:12px;border:0;background:none;color:#0b7a45;font-weight:800;cursor:pointer}
-.kpl-reset-success{background:#effaf3;color:#277044;border-radius:10px;padding:10px 12px;font-size:12px;font-weight:700;margin-top:10px;display:none}
-.kpl-reset-success.show{display:block}
 </style>
 
 </head>
@@ -2531,6 +2308,7 @@ a:hover{opacity:.86}
   </div>
 
   <nav class="kpl-main-nav" aria-label="Fantasy navigation">
+    <button class="nav-btn kpl-home-nav" data-page="dashboard"><span>⌂</span> Home</button>
     <button class="nav-btn" data-page="team"><span>👕</span> Pick Team</button>
     <button class="nav-btn" data-page="points"><span>▥</span> Points</button>
     <button class="nav-btn" data-page="transfers"><span>⇄</span> Transfers</button>
@@ -2799,9 +2577,35 @@ a:hover{opacity:.86}
     </div>
 
     <div class="pickteam-actions">
+      <div class="kpl-chips">
+  <div class="kpl-chip">
+    <div class="chip-icon">🪑</div>
+    <strong>Bench Boost</strong>
+    <button onclick="activateChip('benchBoost')">Play</button>
+  </div>
+
+  <div class="kpl-chip">
+    <div class="chip-icon">👑</div>
+    <strong>Triple Captain</strong>
+    <button onclick="activateChip('tripleCaptain')">Play</button>
+  </div>
+
+  <div class="kpl-chip">
+    <div class="chip-icon">⭐</div>
+    <strong>Wildcard</strong>
+    <button onclick="activateChip('wildcard')">Play</button>
+  </div>
+
+  <div class="kpl-chip">
+    <div class="chip-icon">⚡</div>
+    <strong>Free Hit</strong>
+    <button onclick="activateChip('freeHit')">Play</button>
+  </div>
+</div>
       <button class="btn" onclick="openSquadSelector()">Manage Starting XI</button>
       <button class="btn btn-light" onclick="setCaptain()">Set Captain</button>
       <button class="btn btn-light" onclick="setViceCaptain()">Set Vice-Captain</button>
+      <button class="btn" onclick="confirmInitialTeam()">Confirm Team</button>
       <button class="btn btn-light" onclick="resetFantasy()">Reset Team</button>
     </div>
     <div class="pickteam-status" id="kplSquadStatus"></div>
@@ -4109,6 +3913,17 @@ const EMPTY_FANTASY_STATE = {
   freeTransfers:1,
   transferCost:0,
   gameweek:1,
+  teamConfirmed:false,
+  chips:{
+    first:{benchBoost:true,tripleCaptain:true,wildcard:true,freeHit:true},
+    second:{benchBoost:true,tripleCaptain:true,wildcard:true,freeHit:true}
+  },
+  activeChip:null,
+  chipGameweek:null,
+  pendingChip:null,
+  selectedPickChip:null,
+  freeHitSnapshot:null,
+  lastFreeHitGameweek:null,
   pointsGameweek:1,
   savedAt:null
 };
@@ -4124,7 +3939,12 @@ function getFantasyStateKey(){
 function loadFantasyState(){
   try {
     const saved = JSON.parse(localStorage.getItem(getFantasyStateKey()));
-    return saved ? {...EMPTY_FANTASY_STATE,...saved} : structuredClone(EMPTY_FANTASY_STATE);
+    const state = saved ? {...EMPTY_FANTASY_STATE,...saved} : structuredClone(EMPTY_FANTASY_STATE);
+    if(saved && saved.teamConfirmed===undefined && saved.teamconfirmed!==undefined) state.teamConfirmed=!!saved.teamconfirmed;
+    state.chips={...structuredClone(EMPTY_FANTASY_STATE.chips),...(saved?.chips||{})};
+    state.chips.first={...EMPTY_FANTASY_STATE.chips.first,...(saved?.chips?.first||{})};
+    state.chips.second={...EMPTY_FANTASY_STATE.chips.second,...(saved?.chips?.second||{})};
+    return state;
   } catch(e) {
     return structuredClone(EMPTY_FANTASY_STATE);
   }
@@ -4187,12 +4007,17 @@ async function loadFantasyStateFromCloud(){
     const data=await response.json();
     if(data.state){
       fantasyState={...EMPTY_FANTASY_STATE,...data.state};
+      if(data.state.teamConfirmed===undefined && data.state.teamconfirmed!==undefined) fantasyState.teamConfirmed=!!data.state.teamconfirmed;
+      fantasyState.chips={...structuredClone(EMPTY_FANTASY_STATE.chips),...(data.state.chips||{})};
+      fantasyState.chips.first={...EMPTY_FANTASY_STATE.chips.first,...(data.state.chips?.first||{})};
+      fantasyState.chips.second={...EMPTY_FANTASY_STATE.chips.second,...(data.state.chips?.second||{})};
       try{localStorage.setItem(getFantasyStateKey(), JSON.stringify(fantasyState));}catch(e){}
       fantasyState.team=Array.isArray(fantasyState.team)?fantasyState.team:[];
       fantasyState.startingXI=Array.isArray(fantasyState.startingXI)?fantasyState.startingXI.filter(id=>fantasyState.team.includes(id)):[];
       if(!fantasyState.team.includes(fantasyState.captain))fantasyState.captain='';
       if(!fantasyState.team.includes(fantasyState.viceCaptain))fantasyState.viceCaptain='';
-      renderTeam(); updateTransferTable(); renderPlayersTable(); renderPoints(); updateFantasyCards();
+      restoreFreeHitIfNeeded();
+      renderTeam(); updateTransferTable(); renderPlayersTable(); renderPoints(); updateFantasyCards(); renderChipUI();
       return true;
     }
   }catch(e){
@@ -4203,6 +4028,7 @@ async function loadFantasyStateFromCloud(){
 
 function loadFantasyStateForCurrentUser(){
   fantasyState = loadFantasyState();
+  restoreFreeHitIfNeeded();
   fantasyState.team = Array.isArray(fantasyState.team) ? fantasyState.team : [];
   fantasyState.startingXI = Array.isArray(fantasyState.startingXI) ? fantasyState.startingXI.filter(id=>fantasyState.team.includes(id)) : [];
   if(!fantasyState.team.includes(fantasyState.captain)) fantasyState.captain='';
@@ -4212,6 +4038,7 @@ function loadFantasyStateForCurrentUser(){
   renderPlayersTable();
   renderPoints();
   updateFantasyCards();
+  renderChipUI();
   loadFantasyStateFromCloud();
 }
 
@@ -4255,7 +4082,8 @@ function validateSquad(teamIds){
   if(teamIds.length!==15) return "A fantasy squad must contain exactly 15 players.";
   if(c.GK!==2 || c.DEF!==5 || c.MID!==5 || c.FWD!==3)
     return "Squad must contain 2 goalkeepers, 5 defenders, 5 midfielders and 3 forwards.";
-  if(Math.max(...Object.values(clubs),0)>3) return "You can select a maximum of 3 players from one club.";
+  const maxClub=Object.entries(clubs).find(([club,count])=>count>3);
+if(maxClub) return `Too many players from ${maxClub[0]}. You can only select 3 players from one club.`;
   if(teamValue()>fantasyState.budget+0.001) return "Your squad is over the KSh 100m budget.";
   return null;
 }
@@ -4269,6 +4097,43 @@ function validateStartingXI(){
   const outfield=xi.filter(id=>player(id)?.pos!=="GK").length;
   if(outfield!==10) return "Starting XI must contain 10 outfield players.";
   return null;
+}function confirmInitialTeam(){
+  const squadError=validateSquad(fantasyState.team);
+  if(squadError){
+    notify(squadError);
+    return;
+  }
+
+  const xiError=validateStartingXI();
+  if(xiError){
+    notify(xiError);
+    return;
+  }
+
+  if(fantasyState.teamConfirmed){
+    notify("Your team is already confirmed.");
+    return;
+  }
+
+  fantasyState.teamConfirmed=true;
+  fantasyState.freeTransfers=1;
+  fantasyState.transferCost=0;
+
+  if(fantasyState.selectedPickChip){
+    const chip=fantasyState.selectedPickChip;
+    const half=chipHalf();
+    fantasyState.chips[half][chip]=false;
+    fantasyState.activeChip=chip;
+    fantasyState.chipGameweek=Number(fantasyState.gameweek||1);
+    fantasyState.selectedPickChip=null;
+  }
+
+  saveFantasyState();
+  updateFantasyCards();
+  renderTeam();
+  renderChipUI();
+
+  notify(fantasyState.activeChip ? `${chipLabel(fantasyState.activeChip)} activated for Gameweek ${fantasyState.gameweek}.` : "Team confirmed! You now have 1 free transfer for this Gameweek.");
 }
 
 function updateFantasyCards(){
@@ -4488,7 +4353,7 @@ function buyPlayer(id){
   if(samePos.length>=limits[p.pos]){notify(`You already have the maximum number of ${p.position}s.`);return;}
 
   const clubCount=oldTeam.filter(x=>player(x)?.club===p.club).length;
-  if(clubCount>=3){notify("Maximum 3 players from one club.");return;}
+  if(clubCount>=3){notify(`Too many players from ${p.club}. You can only have 3 players from one club.`);return;}
 
   fantasyState.team.push(id);
   saveFantasyState();
@@ -4601,24 +4466,33 @@ function getOpponentForClub(club){
   return map[club]||'Fixture TBD';
 }
 
+function chipActiveForGW(chip,gw){
+  return fantasyState.activeChip===chip && Number(fantasyState.chipGameweek)===Number(gw);
+}
+
 function pointsRowsForGW(){
+  const gw=Number(fantasyState.pointsGameweek||fantasyState.gameweek||1);
   const starters=fantasyState.startingXI||[];
   const bench=(fantasyState.team||[]).filter(id=>!starters.includes(id));
+  const tripleCaptain=chipActiveForGW('tripleCaptain',gw);
   return [...starters,...bench].map((id,index)=>{
     const p=player(id); if(!p)return null;
     const base=Number(p.points)||0;
     const isStarter=starters.includes(id);
     const captain=id===fantasyState.captain;
+    const multiplier=captain?(tripleCaptain?3:2):1;
     return {
-      p,base,isStarter,captain,
-      display:base*(captain?2:1),
+      p,base,isStarter,captain,multiplier,
+      display:base*multiplier,
       benchNo:isStarter?null:index-starters.length+1
     };
   }).filter(Boolean);
 }
 
 function calculatePoints(){
-  return pointsRowsForGW().filter(r=>r.isStarter).reduce((sum,r)=>sum+r.display,0);
+  const gw=Number(fantasyState.pointsGameweek||fantasyState.gameweek||1);
+  const benchBoost=chipActiveForGW('benchBoost',gw);
+  return pointsRowsForGW().filter(r=>benchBoost||r.isStarter).reduce((sum,r)=>sum+r.display,0);
 }
 
 function renderPoints(){
@@ -4667,7 +4541,7 @@ function renderPoints(){
         <td><div class="fpl-player-name">${avatar}<div><strong>${p.name}</strong><small>${p.club}${badge}</small></div></div></td>
         <td><div class="fpl-fixture"><strong>${opponent}</strong><small>GW${gw} • ${p.pos}</small></div></td>
         <td>${stats}</td><td>${stats}</td><td>${stats}</td><td>${stats}</td><td>${stats}</td>
-        <td><span class="fpl-points-badge ${ptsClass} ${r.captain?'captain':''}">${r.display}${r.captain?' ×2':''}</span></td>
+        <td><span class="fpl-points-badge ${ptsClass} ${r.captain?'captain':''}">${r.display}${r.captain?' ×'+r.multiplier:''}</span></td>
       </tr>`;
     }).join('');
   }
@@ -5087,21 +4961,136 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMarketValue();
   renderPoints();
   updateFantasyCards();
+  renderChipUI();
 });
 
-/* EPL-inspired chips: adapted for KPL Fantasy */
-const KPL_CHIPS = {
-  wildcard: 2,
-  freeHit: 2,
-  benchBoost: 2,
-  tripleCaptain: 2
-};
-function playKplChip(chip){
-  if(!KPL_CHIPS[chip]) return;
-  const labels={wildcard:'Wildcard',freeHit:'Free Hit',benchBoost:'Bench Boost',tripleCaptain:'Triple Captain'};
-  if(confirm(`${labels[chip]}: use this chip for the current Gameweek?`)){
-    KPL_CHIPS[chip]--;
-    if(typeof showToast==='function') showToast(`${labels[chip]} activated`);
+/* EPL-style KPL chips: two sets, one chip per Gameweek, with FPL-style timing. */
+function chipHalf(){
+  return Number(fantasyState.gameweek||1)<=19?'first':'second';
+}
+
+function chipLabel(chip){
+  return {benchBoost:'Bench Boost',tripleCaptain:'Triple Captain',wildcard:'Wildcard',freeHit:'Free Hit'}[chip]||chip;
+}
+
+function chipAvailable(chip){
+  return fantasyState.chips?.[chipHalf()]?.[chip]===true;
+}
+
+function chipLockedByRules(chip){
+  const gw=Number(fantasyState.gameweek||1);
+  if((chip==='wildcard'||chip==='freeHit') && gw===1) return `${chipLabel(chip)} cannot be played in Gameweek 1.`;
+  if(chip==='freeHit' && Number(fantasyState.lastFreeHitGameweek)===gw-1) return 'Free Hit cannot be played in consecutive Gameweeks.';
+  return '';
+}
+
+function renderChipUI(){
+  document.querySelectorAll('.kpl-chip').forEach(card=>{
+    const button=card.querySelector('button');
+    if(!button)return;
+    const strong=card.querySelector('strong');
+    const chip=[...Object.keys({benchBoost:1,tripleCaptain:1,wildcard:1,freeHit:1})].find(k=>chipLabel(k)===(strong?.textContent||'').trim());
+    if(!chip)return;
+    const selected=fantasyState.selectedPickChip===chip || fantasyState.pendingChip===chip;
+    const active=fantasyState.activeChip===chip && Number(fantasyState.chipGameweek)===Number(fantasyState.gameweek);
+    const available=chipAvailable(chip);
+    const locked=chipLockedByRules(chip);
+    button.disabled=(!available&&!selected&&!active)||!!locked;
+    button.textContent=active?'Active':selected?'Cancel':'Play';
+    button.title=locked || (!available&&!selected&&!active)?'Chip already used in this half of the season.':'';
+    card.classList.toggle('chip-active',active);
+    card.classList.toggle('chip-selected',selected);
+  });
+}
+
+function activateChip(chip){
+  const sameActive=fantasyState.activeChip===chip && Number(fantasyState.chipGameweek)===Number(fantasyState.gameweek||1);
+  if(sameActive && (chip==='benchBoost'||chip==='tripleCaptain')){
+    const half=chipHalf();
+    fantasyState.chips[half][chip]=true;
+    fantasyState.activeChip=null;
+    fantasyState.chipGameweek=null;
+    saveFantasyState();
+    renderChipUI();
+    renderPoints();
+    notify(`${chipLabel(chip)} cancelled.`);
+    return;
+  }
+
+  if(!fantasyState.chips?.[chipHalf()]?.[chip]){
+    notify(`${chipLabel(chip)} has already been used in this half of the season.`);
+    return;
+  }
+
+  const sameSelected=fantasyState.selectedPickChip===chip || fantasyState.pendingChip===chip;
+  if(sameSelected){
+    fantasyState.selectedPickChip=null;
+    fantasyState.pendingChip=null;
+    saveFantasyState();
+    renderChipUI();
+    notify(`${chipLabel(chip)} cancelled.`);
+    return;
+  }
+
+  if(fantasyState.activeChip || fantasyState.selectedPickChip || fantasyState.pendingChip){
+    notify('Only one chip can be used in a Gameweek.');
+    return;
+  }
+
+  const rule=chipLockedByRules(chip);
+  if(rule){notify(rule);return;}
+
+  if(chip==='wildcard'||chip==='freeHit'){
+    fantasyState.pendingChip=chip;
+    saveFantasyState();
+    renderChipUI();
+    try{if(typeof fmRenderTransfers==='function')fmRenderTransfers()}catch(e){}
+    notify(`${chipLabel(chip)} selected. Confirm your transfers to play it.`);
+    return;
+  }
+
+  if(fantasyState.teamConfirmed){
+    const half=chipHalf();
+    fantasyState.chips[half][chip]=false;
+    fantasyState.activeChip=chip;
+    fantasyState.chipGameweek=Number(fantasyState.gameweek||1);
+    saveFantasyState();
+    renderChipUI();
+    renderPoints();
+    notify(`${chipLabel(chip)} activated for Gameweek ${fantasyState.gameweek}.`);
+  }else{
+    fantasyState.selectedPickChip=chip;
+    saveFantasyState();
+    renderChipUI();
+    notify(`${chipLabel(chip)} selected. It will be played when you confirm your team.`);
+  }
+}
+
+function cancelActiveChip(){
+  if(!fantasyState.activeChip)return;
+  const chip=fantasyState.activeChip;
+  const half=chipHalf();
+  fantasyState.chips[half][chip]=true;
+  fantasyState.activeChip=null;
+  fantasyState.chipGameweek=null;
+  saveFantasyState();
+  renderChipUI();
+  renderPoints();
+  notify(`${chipLabel(chip)} cancelled.`);
+}
+
+function restoreFreeHitIfNeeded(){
+  const snap=fantasyState.freeHitSnapshot;
+  if(!snap)return;
+  if(Number(fantasyState.gameweek||1)>Number(snap.gameweek)){
+    fantasyState.team=snap.team||[];
+    fantasyState.startingXI=snap.startingXI||[];
+    fantasyState.captain=snap.captain||'';
+    fantasyState.viceCaptain=snap.viceCaptain||'';
+    fantasyState.budget=Number(snap.budget??fantasyState.budget);
+    fantasyState.freeHitSnapshot=null;
+    fantasyState.activeChip=null;
+    fantasyState.chipGameweek=null;
   }
 }
 
@@ -6073,10 +6062,20 @@ document.addEventListener('DOMContentLoaded',function(){
     return Number(state().budget||100)-current+out-inn;
   }
   function transferCount(){return pendingIn.size}
-  function pointsCost(){
-    const free=Math.max(0,Number(state().freeTransfers??1));
-    return Math.max(0,transferCount()-free)*4;
-  }
+function pointsCost(){
+  const st=state();
+
+  // Initial squad building = unlimited free transfers
+  if(!st.teamConfirmed) return 0;
+
+  // Wildcard and Free Hit make all transfers free for this Gameweek.
+  if(st.pendingChip==='wildcard' || st.pendingChip==='freeHit' || st.activeChip==='wildcard' || st.activeChip==='freeHit') return 0;
+
+  // After team confirmation = 1 free transfer per gameweek
+  const free=Math.max(0,Number(st.freeTransfers??1));
+
+  return Math.max(0,transferCount()-free)*4;
+}
   function projectedValid(){
     const team=projectedTeam(), c={GK:0,DEF:0,MID:0,FWD:0}, clubs={};
     team.forEach(id=>{const p=pById(id);if(p){c[p.pos]=(c[p.pos]||0)+1;clubs[p.club]=(clubs[p.club]||0)+1}});
@@ -6227,16 +6226,49 @@ document.addEventListener('DOMContentLoaded',function(){
     const invalid=projectedValid();
     if(invalid){notify(invalid);return}
     const outs=[...pendingOut], ins=[...pendingIn], count=ins.length;
+    const chipBeforeTransfers=fantasyState.pendingChip;
+    const freeHitSnapshotBeforeTransfers=chipBeforeTransfers==='freeHit'?{
+      gameweek:Number(fantasyState.gameweek||1),
+      team:[...(fantasyState.team||[])],
+      startingXI:[...(fantasyState.startingXI||[])],
+      captain:fantasyState.captain||'',
+      viceCaptain:fantasyState.viceCaptain||'',
+      budget:Number(fantasyState.budget??100)
+    }:null;
     // Apply removals first so replacements can use the released budget/club slot.
     outs.forEach(id=>{if(typeof sellPlayer==='function')sellPlayer(id)});
     ins.forEach(id=>{if(typeof buyPlayer==='function')buyPlayer(id)});
-    const free=Math.max(0,Number(fantasyState?.freeTransfers??1));
-    const cost=Math.max(0,count-free)*4;
-    if(fantasyState){
-      fantasyState.transferCost=cost;
-      fantasyState.freeTransfers=Math.max(0,free-count);
-      if(typeof saveFantasyState==='function')saveFantasyState();
+let cost=0;
+
+if(fantasyState){
+  const chip=fantasyState.pendingChip;
+
+  if(chip==='wildcard' || chip==='freeHit'){
+    cost=0;
+
+    if(chip==='freeHit'){
+      fantasyState.freeHitSnapshot=freeHitSnapshotBeforeTransfers;
+      fantasyState.lastFreeHitGameweek=Number(fantasyState.gameweek||1);
     }
+
+    const half=chipHalf();
+    fantasyState.chips[half][chip]=false;
+    fantasyState.activeChip=chip;
+    fantasyState.chipGameweek=Number(fantasyState.gameweek||1);
+    fantasyState.pendingChip=null;
+  }else if(fantasyState.teamConfirmed){
+    const free=Math.max(0,Number(fantasyState.freeTransfers??1));
+    cost=Math.max(0,count-free)*4;
+    fantasyState.freeTransfers=Math.max(0,free-count);
+  }else{
+    // Initial squad building is completely free
+    cost=0;
+  }
+
+  fantasyState.transferCost=cost;
+  if(typeof saveFantasyState==='function')saveFantasyState();
+  try{renderChipUI();}catch(e){}
+}
     clear();
     try{if(typeof renderTeam==='function')renderTeam()}catch(e){}
     try{if(typeof updateFantasyCards==='function')updateFantasyCards()}catch(e){}
@@ -6314,8 +6346,8 @@ document.addEventListener('DOMContentLoaded',function(){
 })();
 </script>
 <script id="kpl-auth-script">
-const KPL_API_ROOT = 'http://localhost:5000/api';
- const KPL_API_BASE = `${KPL_API_ROOT}/auth`;
+const KPL_API_ROOT = (window.location.protocol === 'file:' ? 'http://localhost:5000/api' : '/api');
+const KPL_API_BASE = `${KPL_API_ROOT}/auth`;
 const KPL_FANTASY_API_BASE = `${KPL_API_ROOT}/fantasy`;
 const KPL_AUTH_STORAGE_KEY = 'kplFantasyUser';
 const KPL_TOKEN_STORAGE_KEY = 'kplFantasyToken';
@@ -6361,7 +6393,6 @@ function openAuthModal(){
 function closeAuthModal(){if(!getKPLUser()){if(typeof lockKPLApp==='function')lockKPLApp();return;}if(typeof unlockKPLApp==='function')unlockKPLApp();const modal=document.getElementById('kplAuthModal');if(modal){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');}}
 
 function showAuthForm(type){
-  const resetPanel=document.getElementById('kplForgotPasswordPanel'); if(resetPanel) resetPanel.classList.remove('show');
   document.getElementById('kplLoginForm').style.display=type==='login'?'block':'none';
   document.getElementById('kplRegisterForm').style.display=type==='register'?'block':'none';
   document.getElementById('kplLoginTab').classList.toggle('active',type==='login');
@@ -6371,30 +6402,6 @@ function showAuthForm(type){
 }
 
 function setAuthMessage(id,text,type){const el=document.getElementById(id);if(el){el.textContent=text;el.className='kpl-auth-message '+(type||'');}}
-
-function openForgotPassword(){
-  document.getElementById('kplAuthTabs').style.display='none';
-  document.getElementById('kplLoginForm').style.display='none';
-  document.getElementById('kplRegisterForm').style.display='none';
-  document.getElementById('kplLoggedInPanel').style.display='none';
-  const panel=document.getElementById('kplForgotPasswordPanel');
-  if(panel) panel.classList.add('show');
-  const msg=document.getElementById('kplResetMessage');
-  if(msg){msg.textContent='';msg.className='kpl-auth-message';}
-}
-function backToLogin(){
-  const panel=document.getElementById('kplForgotPasswordPanel');
-  if(panel) panel.classList.remove('show');
-  document.getElementById('kplAuthTabs').style.display='flex';
-  showAuthForm('login');
-}
-async function requestPasswordReset(){
-  const email=(document.getElementById('kplResetEmail')?.value||'').trim();
-  if(!email){setAuthMessage('kplResetMessage','Please enter your email address.','error');return;}
-  setAuthMessage('kplResetMessage','Password reset is being prepared...','');
-  // The visual flow is ready. The secure email-reset endpoint will be connected on the backend next.
-  setTimeout(()=>setAuthMessage('kplResetMessage','Password reset email service is not connected yet. We can add the secure reset system next.','error'),300);
-}
 
 async function submitLogin(event){
   event.preventDefault();
@@ -6481,18 +6488,9 @@ document.addEventListener('DOMContentLoaded',()=>{
       <form id="kplLoginForm" onsubmit="submitLogin(event)">
         <div class="kpl-auth-field"><label for="kplLoginUsername">Username</label><input id="kplLoginUsername" autocomplete="username" required></div>
         <div class="kpl-auth-field"><label for="kplLoginPassword">Password</label><input id="kplLoginPassword" type="password" autocomplete="current-password" required></div>
-        <button class="kpl-forgot-link" type="button" onclick="openForgotPassword()">Forgot password?</button>
         <div class="kpl-auth-message" id="kplLoginMessage"></div>
         <button class="kpl-auth-submit" type="submit">Login</button>
       </form>
-      <div class="kpl-reset-panel" id="kplForgotPasswordPanel">
-        <h3 style="margin:0 0 8px">Reset your password</h3>
-        <p class="kpl-reset-copy">Enter the email address connected to your KPL Fantasy account. We’ll use it to send you a password reset link.</p>
-        <div class="kpl-auth-field"><label for="kplResetEmail">Email address</label><input id="kplResetEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
-        <div class="kpl-auth-message" id="kplResetMessage"></div>
-        <button class="kpl-auth-submit" type="button" onclick="requestPasswordReset()">Send reset link</button>
-        <button class="kpl-reset-back" type="button" onclick="backToLogin()">← Back to login</button>
-      </div>
       <form id="kplRegisterForm" onsubmit="submitRegister(event)" style="display:none">
         <div class="kpl-auth-field"><label for="kplRegisterUsername">Username</label><input id="kplRegisterUsername" autocomplete="username" required minlength="3"></div>
         <div class="kpl-auth-field"><label for="kplRegisterEmail">Email</label><input id="kplRegisterEmail" type="email" autocomplete="email" required></div>
@@ -7006,7 +7004,19 @@ body{
 #team .subs-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.subs-heading h3{margin:0;color:#26003b;font-size:20px}.subs-heading span{color:#527264;font-size:12px;font-weight:800}.subs-manage{border:0;background:#fff;color:#26003b;font-weight:900;padding:8px 13px;border-radius:7px;cursor:pointer}
 #team .subs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 #team .bench-player-card{width:100%;max-width:170px;justify-self:center}.bench-player-card .fpl-jersey-wrap{height:105px}.bench-player-card .pitch-jersey{width:96px!important;height:96px!important}.bench-player-card .fpl-name{font-size:12px}.bench-player-card .fpl-fixture{font-size:10px}
-#team .pickteam-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0 8px}.pickteam-status{text-align:center;font-size:13px;font-weight:800;color:#507064}.pickteam-status.is-error{color:#b22a37}.pickteam-status.is-good{color:#3f715e}
+.pickteam-actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+
+.pickteam-actions .btn{
+  flex:0 0 auto;
+  width:auto;
+  min-width:0;
+}
 @media(max-width:800px){#team .pickteam-head{align-items:stretch;flex-direction:column}.formation-wrap{width:100%;box-sizing:border-box}.pickteam-stats{grid-template-columns:repeat(2,1fr)!important}.fpl-reference-pitch{height:760px!important}.kpl-line{left:2%!important;right:2%!important;gap:7px!important}.fpl-player{width:92px!important}.fpl-jersey-wrap{height:85px!important}.fpl-player .pitch-jersey{width:78px!important;height:78px!important}.fpl-name{font-size:10px!important;padding:5px 3px!important}.fpl-fixture{font-size:8px!important;padding:4px 2px!important}.kpl-gk-line{top:38px!important}.kpl-def-line{top:190px!important}.kpl-mid-line{top:375px!important}.kpl-fwd-line{top:570px!important}.fpl-remove,.fpl-captain-badge{width:19px!important;height:19px!important;font-size:13px!important}.subs-grid{grid-template-columns:repeat(2,1fr)!important}}
 </style><style>
 @media(max-width:900px){
