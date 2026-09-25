@@ -43,8 +43,8 @@ async function testDatabaseConnection() {
 
         connection.release();
     } catch (error) {
-        console.error("MySQL connection failed:", error.message);
-    }
+    console.error("MySQL connection failed:", error);
+}
 }
 
 // Test route
