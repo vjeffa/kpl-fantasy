@@ -1,6 +1,7 @@
  const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const dns = require("dns");
 
 require("dotenv").config({
     path: path.join(__dirname, "..", ".env")
@@ -19,8 +20,33 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// --------------------------------------------------
+// AIVEN DNS DIAGNOSTIC
+// --------------------------------------------------
+const dbHost = process.env.DB_HOST;
+
+console.log("Database host configured as:", dbHost);
+
+if (dbHost) {
+    dns.lookup(dbHost, (error, address, family) => {
+        if (error) {
+            console.error("AIVEN DNS TEST FAILED:", error);
+        } else {
+            console.log(
+                "AIVEN DNS TEST SUCCESS:",
+                address,
+                "IPv" + family
+            );
+        }
+    });
+} else {
+    console.error("AIVEN DNS TEST FAILED: DB_HOST is missing.");
+}
+
+// --------------------------------------------------
 // MySQL connection pool
- const db = mysql.createPool({
+// --------------------------------------------------
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     user: process.env.DB_USER,
@@ -34,7 +60,9 @@ app.use(express.json());
     queueLimit: 0
 });
 
+// --------------------------------------------------
 // Test database connection
+// --------------------------------------------------
 async function testDatabaseConnection() {
     try {
         const connection = await db.getConnection();
@@ -43,11 +71,13 @@ async function testDatabaseConnection() {
 
         connection.release();
     } catch (error) {
-    console.error("MySQL connection failed:", error);
-}
+        console.error("MySQL connection failed:", error);
+    }
 }
 
+// --------------------------------------------------
 // Test route
+// --------------------------------------------------
 app.get("/", (req, res) => {
     res.json({
         message: "KPL Fantasy Backend is running!",
@@ -55,10 +85,14 @@ app.get("/", (req, res) => {
     });
 });
 
+// --------------------------------------------------
 // Authentication routes
+// --------------------------------------------------
 app.use("/api/auth", authRoutes(db));
 
+// --------------------------------------------------
 // Start server
+// --------------------------------------------------
 app.listen(PORT, "0.0.0.0", async () => {
     console.log(`KPL Fantasy backend running on port ${PORT}`);
 
